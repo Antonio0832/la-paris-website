@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<header class="nav">
+<header class="nav" id="home">
   <div class="container">
     <div class="nav-inner">
       <a class="brand" href="index.html">
@@ -21,15 +21,23 @@
       </a>
 
       <nav class="menu">
-        <a href="preise.html">Preise</a>
+        <a href="#home">Home</a>
+        <a href="#rezensionen">Rezensionen</a>
+        <a href="#preise">Preise</a>
+        <a href="#anfahrt">Anfahrt</a>
+        <a href="#kontakt">Kontakt</a>
         <a href="team.html">Team</a>
-        <a href="rechtliches.html">Impressum/Datenschutz</a>
       </nav>
 
       <div class="actions">
         <a class="btn ghost" href="tel:+4917664174916">Anrufen</a>
         <a class="btn primary" href="#kontakt">Kontakt</a>
       </div>
+
+      <label class="theme-switch" for="theme-toggle" aria-label="Darkmode umschalten">
+        <input type="checkbox" id="theme-toggle" />
+        <span class="slider"></span>
+      </label>
     </div>
   </div>
 </header>
@@ -38,43 +46,10 @@
 
   <!-- EINLEITUNG / HERO -->
   <section class="hero">
-    <div class="hero-grid">
-      <div class="card hero-left">
-        <div class="kicker">Barber in Karlsruhe</div>
-        <h1>La Paris</h1>
-        <p class="lead">
-          Willkommen bei <b>La Paris</b> – deinem Herrenfriseur in Karlsruhe.
-          Bei uns sind <b>alle willkommen</b>: jung oder alt, klassisch oder modern.
-          Wir stehen für saubere Schnitte, präzise Konturen und ein Finish, das sitzt.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn primary" href="#kontakt">Kontakt aufnehmen</a>
-          <a class="btn" href="preise.html">Preise ansehen</a>
-          <!-- Termin später -->
-          <!-- <a class="btn primary" href="DEIN-TERMINLINK">Termin buchen</a> -->
-        </div>
-
-        <div class="badges">
-          <div class="badge">★ 4,7 · 338 Rezensionen</div>
-          <div class="badge">Kreuzstraße 19 · 76133 Karlsruhe</div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h2>Cut different. Stay sharp.</h2>
-        <p>
-          Kein Standard – nur ein Look, der zu dir passt.
-          Modern, clean und mit Liebe zum Detail.
-        </p>
-        <p class="small">
-          (Optional später) Auch bekannte Persönlichkeiten & Profisportler waren bereits bei uns – diskret, wie es sich gehört.
-        </p>
-
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-          <a class="btn" style="border-color:rgba(255,255,255,.20);background:rgba(247,244,239,.10);color:#F7F4EF;box-shadow:none;" href="preise.html">Preise</a>
-          <a class="btn" style="border-color:rgba(255,255,255,.20);background:rgba(247,244,239,.10);color:#F7F4EF;box-shadow:none;" href="#standort">Standort</a>
-        </div>
+    <div class="hero-grid hero-grid-single">
+      <div class="card blue-card hero-left">
+        <h1 class="hero-brand">La Paris</h1>
+        <p class="hero-tagline">der Friseur in Karlsruhe</p>
       </div>
     </div>
   </section>
@@ -82,46 +57,41 @@
   <!-- BILDER -->
   <section class="section">
     <h2 class="title">Einblicke</h2>
-    <p class="sub">Hier kommen eure besten Kundenbilder rein (oder Fotos vom Laden).</p>
+    <p class="sub">Ein Einblick in unsere Arbeit – mehr findet ihr auf Instagram.</p>
 
     <div class="gallery">
-      <div class="ph"><!-- <img src="assets/img1.jpg" alt="La Paris Bild 1"> --></div>
-      <div class="ph"><!-- <img src="assets/img2.jpg" alt="La Paris Bild 2"> --></div>
-      <div class="ph"><!-- <img src="assets/img3.jpg" alt="La Paris Bild 3"> --></div>
+      <div class="ph filled"><img src="assets/haarschnitt-1.png" alt="Haarschnitt bei La Paris 1" /></div>
+      <div class="ph filled"><img src="assets/haarschnitt-2.png" alt="Haarschnitt bei La Paris 2" /></div>
+      <div class="ph filled"><img src="assets/haarschnitt-3.png" alt="Haarschnitt bei La Paris 3" /></div>
+    </div>
+    <div class="gallery-cta">
+      <a class="btn primary" href="https://instagram.com/DEIN_INSTAGRAM" target="_blank" rel="noopener">Zu Instagram</a>
     </div>
   </section>
 
   <!-- PREISE (TEASER) -->
-  <section class="section">
-    <div class="grid-2">
-      <div>
-        <h2 class="title">Preise</h2>
-        <p class="sub">
-          Eine klare Übersicht findest du auf unserer Preis-Seite.
-          (Wir tragen die Preistafel später exakt ein.)
-        </p>
+  <section class="section" id="preise">
+    <div class="card blue-card" style="padding:22px;">
+      <h2 class="title">Preise</h2>
+      <p class="sub">
+        Eine klare Übersicht findest du auf unserer Preis-Seite.
+        (Wir tragen die Preistafel später exakt ein.)
+      </p>
 
-        <div class="features">
-          <div class="feature"><b>Haarschnitt</b><p>ab XX €</p></div>
-          <div class="feature"><b>Haarschnitt + Bart</b><p>ab XX €</p></div>
-          <div class="feature"><b>Bart</b><p>ab XX €</p></div>
-        </div>
-
-        <div style="margin-top:14px;">
-          <a class="btn primary" href="preise.html">Zur Preisübersicht</a>
-        </div>
+      <div class="features">
+        <div class="feature"><b>Haarschnitt</b><p>ab XX €</p></div>
+        <div class="feature"><b>Haarschnitt + Bart</b><p>ab XX €</p></div>
+        <div class="feature"><b>Bart</b><p>ab XX €</p></div>
       </div>
+    </div>
 
-      <div class="panel">
-        <h2>Fair. Klar. Transparent.</h2>
-        <p>Keine versteckten Extras — du weißt vorher, was du bekommst.</p>
-        <p class="small">Sobald du mir das Foto der Preistafel schickst, übernehmen wir alles 1:1.</p>
-      </div>
+    <div style="margin-top:14px;">
+      <a class="btn primary" href="preise.html">Zur Preisübersicht</a>
     </div>
   </section>
 
   <!-- REZENSIONEN -->
-  <section class="section">
+  <section class="section" id="rezensionen">
     <div class="split">
       <div>
         <h2 class="title" style="margin-bottom:6px;">Rezensionen</h2>
@@ -131,7 +101,7 @@
     </div>
 
     <div class="review-grid" style="margin-top:14px;">
-      <div class="card review">
+      <div class="card blue-card review">
         <div class="top">
           <div>
             <div class="name">Birhad Al umar</div>
@@ -142,7 +112,7 @@
         <p>„Ein wirklich großartiger Friseursalon! Man wird freundlich empfangen, fühlt sich sofort wohl…“</p>
       </div>
 
-      <div class="card review">
+      <div class="card blue-card review">
         <div class="top">
           <div>
             <div class="name">k.j.s q</div>
@@ -153,7 +123,7 @@
         <p>„Ich war beim La Paris Friseur Salon in Karlsruhe und bin total begeistert!“</p>
       </div>
 
-      <div class="card review">
+      <div class="card blue-card review">
         <div class="top">
           <div>
             <div class="name">Mazen Mirza</div>
@@ -173,22 +143,31 @@
   </section>
 
   <!-- STANDORT -->
-  <section class="section" id="standort">
+  <section class="section" id="anfahrt">
     <div class="grid-2">
-      <div class="card" style="padding:22px;">
-        <h2 class="title" style="margin-top:0;">Standort</h2>
-        <p class="sub" style="margin-bottom:14px;">
-          Kreuzstraße 19, 76133 Karlsruhe
-        </p>
-        <div class="badge" style="margin-bottom:12px;">Zentral in Karlsruhe</div>
-        <div>
-          <a class="btn primary" href="https://www.google.com/maps?q=Kreuzstra%C3%9Fe%2019,%2076133%20Karlsruhe" target="_blank" rel="noopener">
-            Route öffnen
-          </a>
+      <div class="stack-cards">
+        <div class="card blue-card" style="padding:22px;">
+          <h2 class="title" style="margin-top:0;">Anfahrt</h2>
+          <p class="sub" style="margin-bottom:14px;">
+            Kreuzstraße 19, 76133 Karlsruhe
+          </p>
+          <div>
+            <a class="btn primary" href="https://www.google.com/maps?q=Kreuzstra%C3%9Fe%2019,%2076133%20Karlsruhe" target="_blank" rel="noopener">
+              Route öffnen
+            </a>
+          </div>
+        </div>
+
+        <div class="card blue-card more-card" style="padding:22px;">
+          <h2 class="title" style="margin-top:0;">Mehr von uns</h2>
+          <p class="sub" style="margin-bottom:16px;">
+            Wir haben noch weitere Filialen – die findest du hier.
+          </p>
+          <a class="btn primary" href="#">Mehr</a>
         </div>
       </div>
 
-      <div class="card" style="padding:22px;">
+      <div class="card blue-card" style="padding:22px;">
         <h2 class="title" style="margin-top:0;">Karte</h2>
         <iframe
           class="map"
@@ -235,6 +214,33 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  const themeToggle = document.getElementById('theme-toggle');
+
+  // Standardmäßig immer Hellmodus
+  document.body.classList.remove('darkmode');
+  themeToggle.checked = false;
+  localStorage.setItem('theme', 'light');
+
+  themeToggle.addEventListener('change', () => {
+    const isDark = themeToggle.checked;
+    document.body.classList.toggle('darkmode', isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+
+  const revealTargets = document.querySelectorAll('section, .card, .panel, .footer');
+  revealTargets.forEach((el) => el.classList.add('reveal-on-scroll'));
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealTargets.forEach((el) => revealObserver.observe(el));
 </script>
 </body>
 </html>
