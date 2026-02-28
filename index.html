@@ -192,8 +192,17 @@
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
           <a class="btn" style="border-color:rgba(255,255,255,.20);background:rgba(247,244,239,.10);color:#F7F4EF;box-shadow:none;" href="tel:+4917664174916">Jetzt anrufen</a>
-          <a class="btn" style="border-color:rgba(255,255,255,.20);background:rgba(247,244,239,.10);color:#F7F4EF;box-shadow:none;" href="https://instagram.com/DEIN_INSTAGRAM" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn" style="border-color:rgba(255,255,255,.20);background:rgba(247,244,239,.10);color:#F7F4EF;box-shadow:none;" href="https://www.instagram.com/la_paris_karlsruhe_/?hl=de" target="_blank" rel="noopener">Instagram</a>
         </div>
+      </div>
+      <div style="margin:14px 0 0;color:rgba(247,244,239,.86);">
+        <p style="margin:0 0 6px;font-weight:700;">Öffnungszeiten</p>
+        <p style="margin:0;">Montag: 09:00 bis 19:00 Uhr</p>
+        <p style="margin:0;">Dienstag: 09:00 bis 19:00 Uhr</p>
+        <p style="margin:0;">Mittwoch: 09:00 bis 19:00 Uhr</p>
+        <p style="margin:0;">Donnerstag: 09:00 bis 19:00 Uhr</p>
+        <p style="margin:0;">Freitag: 09:00 bis 19:00 Uhr</p>
+        <p style="margin:0;">Samstag: 09:00 bis 18:00 Uhr</p>
       </div>
     </div>
   </section>
@@ -227,6 +236,28 @@
     document.body.classList.toggle('darkmode', isDark);
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });
+
+  const nav = document.querySelector('.nav');
+  let lastScrollY = window.scrollY;
+  const scrollTolerance = 8;
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY <= 0) {
+      nav.classList.remove('nav-hidden');
+      lastScrollY = currentScrollY;
+      return;
+    }
+
+    if (currentScrollY > lastScrollY + scrollTolerance) {
+      nav.classList.add('nav-hidden');
+    } else if (currentScrollY < lastScrollY - scrollTolerance) {
+      nav.classList.remove('nav-hidden');
+    }
+
+    lastScrollY = currentScrollY;
+  }, { passive: true });
 
   const revealTargets = document.querySelectorAll('section, .card, .panel, .footer');
   revealTargets.forEach((el) => el.classList.add('reveal-on-scroll'));
