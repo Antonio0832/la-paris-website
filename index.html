@@ -278,16 +278,17 @@
 
   window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
+    const scrollDelta = currentScrollY - lastScrollY;
 
-    if (currentScrollY <= 0) {
+    if (currentScrollY <= 10) {
       nav.classList.remove('nav-hidden');
       lastScrollY = currentScrollY;
       return;
     }
 
-    if (currentScrollY > lastScrollY + scrollTolerance) {
+    if (scrollDelta > scrollTolerance) {
       nav.classList.add('nav-hidden');
-    } else if (currentScrollY < lastScrollY - scrollTolerance) {
+    } else if (scrollDelta < -2) {
       nav.classList.remove('nav-hidden');
     }
 
@@ -295,7 +296,11 @@
   }, { passive: true });
 
   const revealTargets = document.querySelectorAll('section, .card, .panel, .footer');
-  revealTargets.forEach((el) => el.classList.add('reveal-on-scroll'));
+  revealTargets.forEach((el, index) => {
+    el.classList.add('reveal-on-scroll');
+    const stagger = Math.min(index * 45, 360);
+    el.style.setProperty('--reveal-delay', `${stagger}ms`);
+  });
 
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
