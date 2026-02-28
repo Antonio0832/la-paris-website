@@ -298,7 +298,7 @@
   const revealTargets = document.querySelectorAll('section, .card, .panel, .footer');
   revealTargets.forEach((el, index) => {
     el.classList.add('reveal-on-scroll');
-    const stagger = Math.min(index * 45, 360);
+    const stagger = Math.min(index * 30, 180);
     el.style.setProperty('--reveal-delay', `${stagger}ms`);
   });
 
@@ -309,9 +309,19 @@
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
 
-  revealTargets.forEach((el) => revealObserver.observe(el));
+  revealTargets.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    const inInitialViewport = rect.top < (window.innerHeight * 0.92);
+
+    if (inInitialViewport) {
+      el.classList.add('in-view');
+      return;
+    }
+
+    revealObserver.observe(el);
+  });
 </script>
 </body>
 </html>
