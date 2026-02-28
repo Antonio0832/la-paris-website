@@ -36,7 +36,9 @@ hr{border:0;height:1px;background:var(--line);margin:22px 0}
   backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(255,255,255,.18);
   color:#F7F4EF;
+  transition:transform .28s ease;
 }
+.nav.nav-hidden{transform:translateY(-100%)}
 .nav-inner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
 .brand{display:flex;align-items:center;gap:12px;min-width:220px}
 .brand img{
