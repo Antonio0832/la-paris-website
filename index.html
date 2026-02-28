@@ -227,6 +227,7 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+  document.documentElement.classList.add('js');
 
   const themeToggles = document.querySelectorAll('.theme-toggle-input');
 
@@ -295,10 +296,10 @@
     lastScrollY = currentScrollY;
   }, { passive: true });
 
-  const revealTargets = document.querySelectorAll('section, .card, .panel, .footer');
+  const revealTargets = document.querySelectorAll('section, .footer');
   revealTargets.forEach((el, index) => {
     el.classList.add('reveal-on-scroll');
-    const stagger = Math.min(index * 30, 180);
+    const stagger = Math.min(index * 20, 120);
     el.style.setProperty('--reveal-delay', `${stagger}ms`);
   });
 
@@ -309,18 +310,20 @@
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+  }, { threshold: 0.06, rootMargin: '0px 0px -6% 0px' });
 
-  revealTargets.forEach((el) => {
-    const rect = el.getBoundingClientRect();
-    const inInitialViewport = rect.top < (window.innerHeight * 0.92);
+  requestAnimationFrame(() => {
+    revealTargets.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const inInitialViewport = rect.top < (window.innerHeight * 0.95);
 
-    if (inInitialViewport) {
-      el.classList.add('in-view');
-      return;
-    }
+      if (inInitialViewport) {
+        el.classList.add('in-view');
+        return;
+      }
 
-    revealObserver.observe(el);
+      revealObserver.observe(el);
+    });
   });
 </script>
 </body>

@@ -287,13 +287,17 @@ h1{font-family:var(--serif);margin:14px 0 10px;font-size:52px;line-height:1.02;l
 
 /* Scroll Animation */
 .reveal-on-scroll{
+  opacity:1;
+  transform:none;
+}
+.js .reveal-on-scroll{
   opacity:0;
-  transform:translate3d(0,26px,0);
+  transform:translate3d(0,20px,0);
   transition:
-    opacity .55s cubic-bezier(.22,.61,.36,1),
-    transform .55s cubic-bezier(.22,.61,.36,1);
+    opacity .45s cubic-bezier(.22,.61,.36,1),
+    transform .45s cubic-bezier(.22,.61,.36,1);
   transition-delay:var(--reveal-delay,0ms);
   will-change:opacity,transform;
 }
-.reveal-on-scroll.in-view{opacity:1;transform:translate3d(0,0,0)}
-@media (prefers-reduced-motion: reduce){.reveal-on-scroll{opacity:1;transform:none;transition:none}}
+.js .reveal-on-scroll.in-view{opacity:1;transform:translate3d(0,0,0)}
+@media (prefers-reduced-motion: reduce){.js .reveal-on-scroll{opacity:1;transform:none;transition:none}}
