@@ -236,6 +236,7 @@
     const debugState = { scrollRafCount: 0, revealRafCount: 0 };
 
     if (window.performance?.mark) performance.mark('lp-init-start');
+    performance.mark('lp-init-start');
     console.time('[la-paris] init');
 
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -265,6 +266,10 @@
     const menu = document.querySelector('.menu');
 
     if (menuToggle && menu && nav) {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+
+    if (menuToggle && menu) {
       menuToggle.addEventListener('click', () => {
         const isOpen = menu.classList.toggle('is-open');
         menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
@@ -329,6 +334,40 @@
         }
       }, { passive: true });
     }
+    const nav = document.querySelector('.nav');
+    let lastScrollY = window.scrollY;
+    const scrollTolerance = 8;
+    let scrollTicking = false;
+
+    const applyNavScrollState = () => {
+      debugState.scrollRafCount += 1;
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY;
+
+      if (currentScrollY <= 10) {
+        nav.classList.remove('nav-hidden');
+        lastScrollY = currentScrollY;
+        scrollTicking = false;
+        return;
+      }
+
+      if (scrollDelta < 0) {
+        nav.classList.remove('nav-hidden');
+      } else if (scrollDelta > scrollTolerance) {
+        nav.classList.add('nav-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+      scrollTicking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (scrollTicking) {
+        return;
+      }
+      scrollTicking = true;
+      requestAnimationFrame(applyNavScrollState);
+    }, { passive: true });
 
     const revealTargets = document.querySelectorAll('section, .footer');
     revealTargets.forEach((el, index) => {
@@ -366,6 +405,9 @@
       if (window.performance?.mark) performance.mark('lp-init-end');
       if (window.performance?.measure) performance.measure('lp-init-duration', 'lp-init-start', 'lp-init-end');
       const initMeasure = window.performance?.getEntriesByName ? performance.getEntriesByName('lp-init-duration').pop() : null;
+      performance.mark('lp-init-end');
+      performance.measure('lp-init-duration', 'lp-init-start', 'lp-init-end');
+      const initMeasure = performance.getEntriesByName('lp-init-duration').pop();
       debug('init done', {
         initDurationMs: initMeasure ? Number(initMeasure.duration.toFixed(2)) : null,
         targets: revealTargets.length,
