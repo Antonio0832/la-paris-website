@@ -235,6 +235,7 @@
     const debug = (...args) => console.debug('[la-paris-debug]', ...args);
     const debugState = { scrollRafCount: 0, revealRafCount: 0 };
 
+    if (window.performance?.mark) performance.mark('lp-init-start');
     performance.mark('lp-init-start');
     console.time('[la-paris] init');
 
@@ -260,6 +261,11 @@
       });
     });
 
+    const nav = document.querySelector('.nav');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+
+    if (menuToggle && menu && nav) {
     const menuToggle = document.querySelector('.menu-toggle');
     const menu = document.querySelector('.menu');
 
@@ -287,6 +293,47 @@
       }, { passive: true });
     }
 
+    if (nav) {
+      const scrollThreshold = 8;
+      let lastScrollY = window.scrollY;
+      let currentScrollY = window.scrollY;
+      let isTicking = false;
+
+      const updateNavOffset = () => {
+        const navHeight = Math.ceil(nav.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--nav-offset', `${navHeight}px`);
+      };
+
+      const updateHeaderOnScroll = () => {
+        debugState.scrollRafCount += 1;
+        const scrollDelta = currentScrollY - lastScrollY;
+
+        if (currentScrollY <= 10) {
+          nav.classList.remove('nav-hidden');
+        } else if (Math.abs(scrollDelta) > scrollThreshold) {
+          if (scrollDelta > 0) {
+            nav.classList.add('nav-hidden');
+          } else {
+            nav.classList.remove('nav-hidden');
+          }
+          lastScrollY = currentScrollY;
+        }
+
+        isTicking = false;
+      };
+
+      updateNavOffset();
+      nav.classList.remove('nav-hidden');
+
+      window.addEventListener('resize', updateNavOffset, { passive: true });
+      window.addEventListener('scroll', () => {
+        currentScrollY = window.scrollY;
+        if (!isTicking) {
+          isTicking = true;
+          requestAnimationFrame(updateHeaderOnScroll);
+        }
+      }, { passive: true });
+    }
     const nav = document.querySelector('.nav');
     let lastScrollY = window.scrollY;
     const scrollTolerance = 8;
@@ -355,6 +402,9 @@
       });
 
       console.timeEnd('[la-paris] reveal-init');
+      if (window.performance?.mark) performance.mark('lp-init-end');
+      if (window.performance?.measure) performance.measure('lp-init-duration', 'lp-init-start', 'lp-init-end');
+      const initMeasure = window.performance?.getEntriesByName ? performance.getEntriesByName('lp-init-duration').pop() : null;
       performance.mark('lp-init-end');
       performance.measure('lp-init-duration', 'lp-init-start', 'lp-init-end');
       const initMeasure = performance.getEntriesByName('lp-init-duration').pop();
